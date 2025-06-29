@@ -6,6 +6,8 @@ import { TbSettings } from "react-icons/tb";
 import { TbTag } from "react-icons/tb";
 import { TbBriefcase } from "react-icons/tb";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdCampaign } from "react-icons/md";
+import { MdNotifications } from "react-icons/md";
 
 export const navItems = [
   {
@@ -32,6 +34,16 @@ export const navItems = [
     title: "Orders",
     url: "/orders",
     icon: <TbTruckDelivery />,
+  },
+  {
+    title: "Campaigns",
+    url: "/campaigns",
+    icon: <MdCampaign />,
+  },
+  {
+    title: "Triggered Discounts",
+    url: "/triggered-discounts",
+    icon: <MdNotifications />,
   },
   {
     title: "Coupons",

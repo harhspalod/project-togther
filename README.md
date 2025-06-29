@@ -1,47 +1,85 @@
-# Ecommerce Admin Dashboard - Frontend Only
+# E-commerce Admin CRM Dashboard
 
-A modern, responsive ecommerce admin dashboard built with Next.js, TypeScript, and Tailwind CSS. This is a pure frontend application with mock data for demonstration purposes.
-
+A complete full-stack e-commerce admin dashboard with campaign automation, customer management, and analytics.
 
 ## Features
 
-- **📊 Dashboard Overview** - Analytics charts and key metrics
-- **🛍️ Product Management** - Complete product catalog with categories
-- **📦 Order Management** - Order tracking and status updates
-- **👥 Customer Management** - Customer profiles and information
-- **🏷️ Category Management** - Product category organization
-- **🎫 Coupon Management** - Discount codes and promotions
-- **👨‍💼 Staff Management** - Team member administration
-- **🔔 Notifications** - Real-time notification system
-- **🌙 Dark/Light Mode** - Theme switching support
-- **📱 Responsive Design** - Mobile-first responsive layout
-- **📋 Data Tables** - Advanced tables with pagination and filtering
-- **📈 Interactive Charts** - Beautiful analytics visualizations
+### 🔐 Authentication & Security
+- Admin login with JWT authentication
+- Protected API routes with middleware
+- Role-based access control
 
-## Technologies Used
+### 📊 Analytics Dashboard
+- Real-time sales analytics
+- Customer growth tracking
+- Revenue charts and metrics
+- Order status distribution
 
-- **Frontend Framework:** Next.js 14 with TypeScript
-- **Styling:** Tailwind CSS with custom design system
-- **UI Components:** Radix UI primitives with shadcn/ui
-- **Data Visualization:** Chart.js with react-chartjs-2
-- **State Management:** TanStack Query for data fetching
-- **Mock Data:** Faker.js for realistic demo data
-- **Icons:** Lucide React and React Icons
-- **Forms:** React Hook Form with Zod validation
+### 🛍️ Product Management
+- Add, edit, delete products
+- Category management
+- Stock tracking
+- Image upload support
+
+### 👥 Customer Management
+- Customer profiles and contact info
+- Order history tracking
+- Purchase analytics per customer
+
+### 🎯 Campaign Automation
+- Create discount campaigns with conditions
+- Automatic trigger detection
+- Coupon code generation
+- Customer notification system
+
+### 📈 Triggered Discounts
+- Real-time campaign triggers
+- Customer contact tracking
+- Discount usage monitoring
+- Status management (pending/contacted/used)
+
+### 📦 Order Management
+- Order creation and tracking
+- Invoice generation
+- Payment method tracking
+- Automatic campaign trigger checking
+
+## Tech Stack
+
+### Frontend
+- **Next.js 14** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **shadcn/ui** for UI components
+- **TanStack Query** for data fetching
+- **Recharts** for analytics visualization
+
+### Backend
+- **Next.js API Routes** for REST API
+- **Drizzle ORM** for database operations
+- **PostgreSQL** for data storage
+- **JWT** for authentication
+- **bcryptjs** for password hashing
+
+### Database Schema
+- Products, Categories, Customers
+- Orders and Order Items
+- Campaigns and Triggered Discounts
+- Admin Users and Coupons
 
 ## Getting Started
 
 ### Prerequisites
-
-- Node.js 18+ 
+- Node.js 18+
+- PostgreSQL database
 - npm or yarn
 
 ### Installation
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-username/ecommerce-admin.git
-cd ecommerce-admin
+git clone <repository-url>
+cd ecommerce-admin-crm
 ```
 
 2. **Install dependencies:**
@@ -49,100 +87,110 @@ cd ecommerce-admin
 npm install
 ```
 
-3. **Start the development server:**
+3. **Set up environment variables:**
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` with your database URL and JWT secret:
+```env
+DATABASE_URL="postgresql://username:password@localhost:5432/ecommerce_crm"
+JWT_SECRET="your-super-secret-jwt-key"
+```
+
+4. **Set up the database:**
+```bash
+# Generate migration files
+npm run db:generate
+
+# Run migrations
+npm run db:migrate
+
+# Seed the database with sample data
+npm run db:seed
+```
+
+5. **Start the development server:**
 ```bash
 npm run dev
 ```
 
-4. **Open your browser:**
-Navigate to [http://localhost:3000](http://localhost:3000)
+6. **Access the application:**
+- Open [http://localhost:3000](http://localhost:3000)
+- Login with: `admin@example.com` / `password123`
 
-## Project Structure
+## Database Management
 
-```
-src/
-├── app/                    # Next.js app directory
-│   ├── (dashboard)/       # Dashboard pages
-│   ├── globals.css        # Global styles
-│   └── layout.tsx         # Root layout
-├── components/            # Reusable UI components
-│   ├── ui/               # Base UI components
-│   └── shared/           # Shared components
-├── data/                 # Mock data and API functions
-├── types/                # TypeScript type definitions
-├── constants/            # Application constants
-├── helpers/              # Utility functions
-├── hooks/                # Custom React hooks
-└── lib/                  # Library configurations
-```
-
-## Mock Data
-
-The application uses Faker.js to generate realistic mock data for:
-
-- **Products** - Names, descriptions, prices, categories, stock levels
-- **Orders** - Customer orders with various statuses and payment methods
-- **Customers** - User profiles with contact information
-- **Categories** - Product categorization
-- **Coupons** - Discount codes and promotional offers
-- **Staff** - Team member profiles and roles
-- **Notifications** - System notifications and alerts
-
-## Key Features
-
-### Dashboard Analytics
-- Sales overview with interactive charts
-- Order status tracking
-- Revenue metrics and KPIs
-- Best-selling products visualization
-
-### Data Management
-- Advanced data tables with sorting and filtering
-- Pagination for large datasets
-- Search functionality
-- Bulk actions support
-
-### User Experience
-- Responsive design for all screen sizes
-- Dark and light theme support
-- Smooth animations and transitions
-- Intuitive navigation and layout
-
-## Customization
-
-### Adding New Pages
-1. Create a new page in `src/app/(dashboard)/`
-2. Add the route to navigation in `src/constants/navItems.tsx`
-3. Create corresponding components and data functions
-
-### Modifying Mock Data
-Edit the data generation functions in `src/data/mockData.ts` to customize:
-- Data structure
-- Field values
-- Relationships between entities
-- Data volume
-
-### Styling
-- Modify `tailwind.config.ts` for design system changes
-- Update CSS variables in `src/app/globals.css`
-- Customize component styles in respective component files
-
-## Build and Deployment
-
-### Build for Production
+### Drizzle Studio
+View and edit your database with Drizzle Studio:
 ```bash
-npm run build
+npm run db:studio
 ```
 
-### Start Production Server
+### Migrations
+Generate new migrations after schema changes:
 ```bash
-npm start
+npm run db:generate
+npm run db:migrate
 ```
 
-### Deploy to Vercel
-```bash
-npx vercel
-```
+## Campaign System
+
+### How It Works
+1. **Create Campaign**: Set discount conditions (quantity/amount thresholds)
+2. **Order Processing**: When orders are created, the system checks all active campaigns
+3. **Automatic Triggers**: If conditions are met, discounts are automatically triggered
+4. **Customer Notification**: Triggered discounts are logged for follow-up
+5. **Status Tracking**: Track contact attempts and coupon usage
+
+### Example Campaign
+- **Condition**: Customer buys 10+ items
+- **Action**: Generate 15% discount coupon
+- **Result**: Customer gets notified with unique coupon code
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/login` - Admin login
+- `POST /api/auth/logout` - Admin logout
+
+### Products
+- `GET /api/products` - List products with pagination
+- `POST /api/products` - Create new product
+
+### Customers
+- `GET /api/customers` - List customers with pagination
+- `POST /api/customers` - Create new customer
+
+### Orders
+- `GET /api/orders` - List orders with pagination
+- `POST /api/orders` - Create new order (triggers campaign checks)
+
+### Campaigns
+- `GET /api/campaigns` - List campaigns
+- `POST /api/campaigns` - Create new campaign
+
+### Analytics
+- `GET /api/analytics/dashboard` - Get dashboard analytics
+
+### Triggered Discounts
+- `GET /api/triggered-discounts` - List triggered discounts
+- `PATCH /api/triggered-discounts` - Update discount status
+
+## Future Enhancements
+
+### Phase 2 Features
+- **Chatbot Integration**: AI-powered customer support
+- **Social Media Webhooks**: Instagram/WhatsApp integration
+- **SMS/Email Automation**: Twilio integration for notifications
+- **Advanced Analytics**: Customer segmentation and behavior analysis
+- **Multi-channel Marketing**: Broadcast campaigns across platforms
+
+### Planned Integrations
+- **Twilio**: SMS notifications for triggered discounts
+- **OpenAI**: Chatbot for customer queries
+- **Meta Business API**: Social media campaign management
+- **Email Services**: Automated email marketing
 
 ## Contributing
 
@@ -156,6 +204,6 @@ npx vercel
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
+## Support
 
-For questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+For questions or support, please open an issue in the repository or contact the development team.
